@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MvvmTest.VM;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,15 @@ namespace MvvmTest
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            MainWindow window = new MainWindow();
+            var viewModel = new MainVM();
+            window.DataContext = viewModel;
+
+            window.Show();
+        }
     }
 }
