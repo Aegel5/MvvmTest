@@ -40,7 +40,7 @@
 					>
 					<HeaderedContentControl.Content>
 						<StackPanel>
-							<Button Command="{Binding NewUser}">
+							<Button Command="{Binding AddNewUserCmd}">
 								Добавить пользователя
 							</Button>
 							<Button>

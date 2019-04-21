@@ -25,6 +25,14 @@ namespace MvvmTest.Model
             _users.Add(new User { Email = "Nikol@mail.ru", Name = "Nikol" });
         }
 
+        public void AddUser(User user)
+        {
+            _users.Add(user);
+            this.UserListChanged(this, new UserListChangedEventArg());
+        }
+
+        public event EventHandler<UserListChangedEventArg> UserListChanged;
+
         List<User> _users;
     }
 }

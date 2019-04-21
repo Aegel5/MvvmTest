@@ -15,21 +15,40 @@ namespace MvvmTest.VM
     {
         readonly UserRepository _userRepository;
 
-        public ICommand NewUser { get; private set; }
+        public ICommand AddNewUserCmd { get; private set; }
         public ObservableCollection<UserVM> UserVMList { get; private set; }
 
+        void AddNewUser()
+        {
+            var user = User.CreateNewUser();
+            user.Name = "new user";
+            user.Email = "new email";
+            //var userVM = new UserVM(user);
+            _userRepository.AddUser(user);
+        }
 
-        RelayCommand _NewUser;
+
         public MainVM()
         {
             _userRepository = new UserRepository();
 
-            _NewUser = new RelayCommand(param => MessageBox.Show("Create new user"));
-            NewUser = _NewUser;
+            AddNewUserCmd = new RelayCommand(param => AddNewUser());
 
-            var allUsers = _userRepository.GetUsers();
-            UserVMList = new ObservableCollection<UserVM>(allUsers.Select(x => new UserVM(x)));
+            _userRepository.UserListChanged += _userRepository_UserListChanged;
+
+            RefreshUserList();
         }
 
+        void RefreshUserList()
+        {
+            var allUsers = _userRepository.GetUsers();
+            UserVMList = new ObservableCollection<UserVM>(allUsers.Select(x => new UserVM(x)));
+            base.OnPropertyChanged("UserVMList");
+        }
+
+        private void _userRepository_UserListChanged(object sender, UserListChangedEventArg e)
+        {
+            RefreshUserList();
+        }
     }
 }
