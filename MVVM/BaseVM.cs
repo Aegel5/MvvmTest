@@ -15,11 +15,11 @@ namespace MvvmTest.VM
     /// It provides support for property change notifications 
     /// and has a DisplayName property.  This class is abstract.
     /// </summary>
-    public abstract class ViewModelBase : INotifyPropertyChanged, IDisposable
+    public abstract class BaseVM : INotifyPropertyChanged, IDisposable
     {
         #region Constructor
 
-        protected ViewModelBase()
+        protected BaseVM()
         {
         }
 
@@ -118,7 +118,7 @@ namespace MvvmTest.VM
         /// <summary>
         /// Useful for ensuring that ViewModel objects are properly garbage collected.
         /// </summary>
-        ~ViewModelBase()
+        ~BaseVM()
         {
             string msg = string.Format("{0} ({1}) ({2}) Finalized", this.GetType().Name, this.DisplayName, this.GetHashCode());
             System.Diagnostics.Debug.WriteLine(msg);

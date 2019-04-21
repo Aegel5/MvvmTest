@@ -43,6 +43,9 @@
 							<Button Command="{Binding NewUser}">
 								Добавить пользователя
 							</Button>
+							<Button>
+								Показать пользователей
+							</Button>
 						</StackPanel>
 					</HeaderedContentControl.Content>
 					
@@ -57,8 +60,22 @@
 					  Header="Workspaces"
 					  Style="{StaticResource MainHCCStyle}">
 					<HeaderedContentControl.Content>
-						<ListView>
+						<ListView
+							ItemsSource="{Binding UserVMList}"
+							>
 							
+							<ListView.View>
+								<GridView>
+									<GridViewColumn 
+										Header="Name" 
+										DisplayMemberBinding="{Binding Path=Name}" 
+										/>	
+									<GridViewColumn 
+										Header="E-mail" 
+										DisplayMemberBinding="{Binding Path=Email}" 
+										/>
+								</GridView>
+							</ListView.View>
 						</ListView>
 					</HeaderedContentControl.Content>
 				</HeaderedContentControl>
