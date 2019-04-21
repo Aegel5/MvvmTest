@@ -60,8 +60,20 @@
     <Compile Include="Model\User.cs" />
     <Compile Include="MVVM\BaseVM.cs" />
     <Compile Include="MVVM\RelayCommand.cs" />
+    <Compile Include="View\AllUserListView.xaml.cs">
+      <DependentUpon>AllUserListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserView.xaml.cs">
+      <DependentUpon>UserView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VM\AllUsersVM.cs" />
     <Compile Include="VM\MainVM.cs" />
     <Compile Include="VM\UserVM.cs" />
+    <Compile Include="VM\WorkspaceBaseVM.cs" />
+    <Page Include="View\AllUserListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -75,6 +87,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\MainWindowResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
