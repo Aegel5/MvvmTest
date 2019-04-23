@@ -28,7 +28,7 @@ namespace MvvmTest.Model
         public void AddUser(User user)
         {
             _users.Add(user);
-            this.UserListChanged(this, new UserListChangedEventArg());
+            this.UserListChanged?.Invoke(this, new UserListChangedEventArg());
         }
 
         public event EventHandler<UserListChangedEventArg> UserListChanged;

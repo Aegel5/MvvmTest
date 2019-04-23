@@ -63,6 +63,7 @@
     <Compile Include="View\AllUserListView.xaml.cs">
       <DependentUpon>AllUserListView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VM\CommandView.cs" />
     <Compile Include="View\UserView.xaml.cs">
       <DependentUpon>UserView.xaml</DependentUpon>
     </Compile>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MvvmTest.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,16 @@ namespace MvvmTest.View
         public AllUserListView()
         {
             InitializeComponent();
+        }
+
+        private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            //ListView lv = sender as ListView;
+            //var selected = lv.SelectedItems;
+            //if (selected == null)
+            //    return;
+            //User user;
+            //selected.
         }
     }
 }

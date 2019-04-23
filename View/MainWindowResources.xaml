@@ -108,5 +108,19 @@
 			/>
 	</DataTemplate>
 
+	<DataTemplate x:Key="CommandsTemplate">
+		<ItemsControl IsTabStop="False" ItemsSource="{Binding}" Margin="6,2">
+			<ItemsControl.ItemTemplate>
+				<DataTemplate>
+					<TextBlock Margin="2,6">
+            <Hyperlink Command="{Binding Path=Command}">
+              <TextBlock Text="{Binding Path=Name}" />
+            </Hyperlink>
+          </TextBlock>
+				</DataTemplate>
+			</ItemsControl.ItemTemplate>
+		</ItemsControl>
+	</DataTemplate>
+
 </ResourceDictionary>
 	

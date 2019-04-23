@@ -1,12 +1,16 @@
 ﻿using MvvmTest.Model;
 using MvvmTest.MVVM;
+using MvvmTest.Properties;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace MvvmTest.VM
@@ -15,9 +19,10 @@ namespace MvvmTest.VM
     {
         readonly UserRepository _userRepository;
 
-        public ICommand AddNewUserCmd { get; private set; }
-        public ICommand ShowAllUsersCmd { get; private set; }
+        //public ICommand AddNewUserCmd { get; private set; }
+        //public ICommand ShowAllUsersCmd { get; private set; }
         public ObservableCollection<WorkspaceBaseVM> Workspaces { get; private set; }
+        public ObservableCollection<CommandView> Commands { get; private set; }
         
 
         void AddNewUser()
@@ -31,7 +36,28 @@ namespace MvvmTest.VM
 
         void ShowAllUsers()
         {
+            WorkspaceBaseVM workspace = this.Workspaces.FirstOrDefault(vm => vm is WorkspaceBaseVM) as WorkspaceBaseVM;
+            if(workspace == null)
+            {
+                workspace = new AllUsersVM(_userRepository, this);
+                Workspaces.Add(workspace);
+            }
+            SetActiveWorkspace(workspace);
+        }
 
+        void SetActiveWorkspace(WorkspaceBaseVM workspace)
+        {
+            Debug.Assert(this.Workspaces.Contains(workspace));
+
+            ICollectionView collectionView = CollectionViewSource.GetDefaultView(this.Workspaces);
+            if (collectionView != null)
+                collectionView.MoveCurrentTo(workspace);
+        }
+
+        public void CloseRequest(WorkspaceBaseVM workspace)
+        {
+            workspace.Dispose();
+            this.Workspaces.Remove(workspace);
         }
 
 
@@ -39,11 +65,15 @@ namespace MvvmTest.VM
         {
             _userRepository = new UserRepository();
 
-            AddNewUserCmd = new RelayCommand(param => AddNewUser());
-            ShowAllUsersCmd = new RelayCommand(param => ShowAllUsers());
+            //AddNewUserCmd = ;
+            //ShowAllUsersCmd = ;
+
+            Commands = new ObservableCollection<CommandView>();
+            Commands.Add(new CommandView(new RelayCommand(param => AddNewUser()), Resources.MainVM_Command_CreateNewUser));
+            Commands.Add(new CommandView(new RelayCommand(param => ShowAllUsers()), Resources.MainVM_Command_ShowAllUsers));
 
             Workspaces = new ObservableCollection<WorkspaceBaseVM>();
-            Workspaces.Add(new AllUsersVM(_userRepository));
+            
 
         }
 

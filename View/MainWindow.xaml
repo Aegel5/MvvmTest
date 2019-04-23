@@ -31,20 +31,23 @@
 			<Border 
 				Grid.Column="0" 
 				Style="{StaticResource MainBorderStyle}"
-				Width="170"
+				MinWidth="170"
+				MaxWidth="250"
 				>
 				<HeaderedContentControl
 					
 					Header="Control Panel"
 					Style="{StaticResource MainHCCStyle}"
+					Content="{Binding Path=Commands}"
+					ContentTemplate="{StaticResource CommandsTemplate}"					
 					>
-					<HeaderedContentControl.Content>
+					<!--<HeaderedContentControl.Content>
 						<StackPanel>
 							<Button Command="{Binding AddNewUserCmd}">
 								Добавить пользователя
 							</Button>
 						</StackPanel>
-					</HeaderedContentControl.Content>
+					</HeaderedContentControl.Content>-->
 					
 				</HeaderedContentControl>
 			</Border>

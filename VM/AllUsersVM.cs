@@ -13,10 +13,8 @@ namespace MvvmTest.VM
         public ObservableCollection<User> UserVMList { get; private set; }
         UserRepository _userRepository;
 
-        public AllUsersVM(UserRepository userRep)
+        public AllUsersVM(UserRepository userRep, MainVM parent):base(parent)
         {
-            IsClosable = false;
-
             _userRepository = userRep;
             DisplayName = "Список пользователей";
             _userRepository.UserListChanged += _userRepository_UserListChanged;

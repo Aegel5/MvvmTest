@@ -10,56 +10,23 @@ namespace MvvmTest.VM
 {
     class WorkspaceBaseVM : BaseVM
     {
-        public bool IsClosable { get; set; } = true;
-
-        #region Fields
-
-        RelayCommand _closeCommand;
-
-        #endregion // Fields
-
-        #region Constructor
-
-        protected WorkspaceBaseVM()
+        MainVM _parent;
+        public WorkspaceBaseVM(MainVM parent)
         {
+            _parent = parent;
         }
 
-        #endregion // Constructor
-
-        #region CloseCommand
-
-        /// <summary>
-        /// Returns the command that, when invoked, attempts
-        /// to remove this workspace from the user interface.
-        /// </summary>
+        ICommand _closeCommand;
         public ICommand CloseCommand
         {
             get
             {
                 if (_closeCommand == null)
-                    _closeCommand = new RelayCommand(param => this.OnRequestClose());
+                    _closeCommand = new RelayCommand(param => _parent.CloseRequest(this));
 
                 return _closeCommand;
             }
         }
-
-        #endregion // CloseCommand
-
-        #region RequestClose [event]
-
-        /// <summary>
-        /// Raised when this workspace should be removed from the UI.
-        /// </summary>
-        public event EventHandler RequestClose;
-
-        void OnRequestClose()
-        {
-            EventHandler handler = this.RequestClose;
-            if (handler != null)
-                handler(this, EventArgs.Empty);
-        }
-
-        #endregion // RequestClose [event]
     }
 }
 
