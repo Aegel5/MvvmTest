@@ -23,6 +23,7 @@ namespace MvvmTest.VM
         //public ICommand ShowAllUsersCmd { get; private set; }
         public ObservableCollection<WorkspaceBaseVM> Workspaces { get; private set; }
         public ObservableCollection<CommandView> Commands { get; private set; }
+
         
 
         void AddNewUser()
@@ -36,13 +37,19 @@ namespace MvvmTest.VM
 
         void ShowAllUsers()
         {
-            WorkspaceBaseVM workspace = this.Workspaces.FirstOrDefault(vm => vm is WorkspaceBaseVM) as WorkspaceBaseVM;
+            WorkspaceBaseVM workspace = this.Workspaces.FirstOrDefault(vm => vm is AllUsersVM) as WorkspaceBaseVM;
             if(workspace == null)
             {
                 workspace = new AllUsersVM(_userRepository, this);
                 Workspaces.Add(workspace);
             }
             SetActiveWorkspace(workspace);
+        }
+
+        public void ShowUser(UserVM userVM)
+        {
+            Workspaces.Add(new UserWorkspace(userVM.userModel.Clone(), this, _userRepository));
+            SetActiveWorkspace(Workspaces.Last());
         }
 
         void SetActiveWorkspace(WorkspaceBaseVM workspace)
@@ -61,6 +68,8 @@ namespace MvvmTest.VM
         }
 
 
+
+
         public MainVM()
         {
             _userRepository = new UserRepository();
@@ -73,8 +82,8 @@ namespace MvvmTest.VM
             Commands.Add(new CommandView(new RelayCommand(param => ShowAllUsers()), Resources.MainVM_Command_ShowAllUsers));
 
             Workspaces = new ObservableCollection<WorkspaceBaseVM>();
-            
 
+            ShowAllUsers();
         }
 
 

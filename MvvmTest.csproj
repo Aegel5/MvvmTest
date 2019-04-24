@@ -70,6 +70,7 @@
     <Compile Include="VM\AllUsersVM.cs" />
     <Compile Include="VM\MainVM.cs" />
     <Compile Include="VM\UserVM.cs" />
+    <Compile Include="VM\UserWorkspace.cs" />
     <Compile Include="VM\WorkspaceBaseVM.cs" />
     <Page Include="View\AllUserListView.xaml">
       <SubType>Designer</SubType>

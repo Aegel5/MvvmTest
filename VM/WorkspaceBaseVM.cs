@@ -10,19 +10,18 @@ namespace MvvmTest.VM
 {
     class WorkspaceBaseVM : BaseVM
     {
-        MainVM _parent;
+        public MainVM Parent { get; private set; }
         public WorkspaceBaseVM(MainVM parent)
         {
-            _parent = parent;
+            Parent = parent;
         }
-
         ICommand _closeCommand;
         public ICommand CloseCommand
         {
             get
             {
                 if (_closeCommand == null)
-                    _closeCommand = new RelayCommand(param => _parent.CloseRequest(this));
+                    _closeCommand = new RelayCommand(param => Parent.CloseRequest(this));
 
                 return _closeCommand;
             }

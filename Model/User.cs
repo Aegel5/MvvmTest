@@ -8,6 +8,11 @@ namespace MvvmTest.Model
 {
     class User
     {
+        public User Clone()
+        {
+            return (User)MemberwiseClone();
+        }
+        public long Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
 

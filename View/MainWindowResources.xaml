@@ -71,7 +71,7 @@
   This template applies a CustomerView to an instance  
   of the CustomerViewModel class shown in the main window.
   -->
-	<DataTemplate DataType="{x:Type vm:UserVM}">
+	<DataTemplate DataType="{x:Type vm:UserWorkspace}">
 		<view:UserView />
 	</DataTemplate>
 

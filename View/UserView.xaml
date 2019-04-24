@@ -33,21 +33,21 @@
 		<TextBox 
       x:Name="firstNameTxt"
       Grid.Row="2" Grid.Column="2" 
-      Text="{Binding Path=FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
+      Text="{Binding Path=Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
       Validation.ErrorTemplate="{x:Null}"
       />
 
 		<!-- LAST NAME-->
 		<Label 
       Grid.Row="4" Grid.Column="0" 
-      Content="_Last name:" 
+      Content="_Email:" 
       HorizontalAlignment="Right"
-      Target="{Binding ElementName=lastNameTxt}" 
+      Target="{Binding ElementName=Email}" 
       />
 		<TextBox 
       x:Name="lastNameTxt"
       Grid.Row="4" Grid.Column="2" 
-      Text="{Binding Path=LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+      Text="{Binding Path=Email, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
       Validation.ErrorTemplate="{x:Null}"
       />
 
